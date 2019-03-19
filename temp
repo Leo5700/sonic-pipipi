@@ -1,0 +1,34 @@
+# Повтор со сдвигом
+
+define :chord_player do |root, harm, delay|
+  # Эта функция играет аккорд, принимая на вход
+  # название аккорда, гармонию и паузу после аккорда.
+  play chord(root, harm), release: 0.5
+  sleep delay
+
+end
+
+define :square do
+  # Эта функция играет квадрат
+  chord_player :a3, :minor, 1
+  chord_player :f4, :major, 1
+  chord_player :c4, :major, 1
+  chord_player :e4, :major, 1
+end
+
+# Играем квадрат циклом :a и его же со сдвигом циклом :b
+live_loop :a do
+  square
+end
+
+first_run = true
+live_loop :b do
+  if first_run == true then
+    sleep 0.1
+    first_run = false
+  end
+  square
+end
+
+
+# ====================================================================
