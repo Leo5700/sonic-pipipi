@@ -101,3 +101,43 @@ end
 https://vk.com/@17551891-generativnaya-muzyka про генеративную музыку
 
 
+# ====================================================================
+
+
+# Время не спешит v1 190325
+
+beat = 0.16
+
+use_synth :dsaw
+live_loop :a do
+  notes_a = scale(:e2, :major_pentatonic, num_octaves: 3)
+  16.times do
+    play notes_a.choose, release: 12, cutoff: rrand(50, 102), amp: rrand(0.8, 1)
+    play notes_a.choose, release: 12, cutoff: rrand(50, 102), amp: rrand(0.8, 1)
+    sleep rrand_i(12, 72) * beat
+  end
+end
+
+use_synth :fm
+notes_b = ring(:b2, :c1, :ab2, :c1)
+live_loop :b do
+  sleep beat/1.6
+  play notes_b.tick(), release: beat, cutoff: 107, amp: rrand(0.8, 1)
+  sleep beat/0.4
+end
+
+live_loop :c do
+  sleep beat/2.0
+  i = 26
+  12.times do
+    i -= 1
+    print i
+    sleep i**1.02 * beat / 24.0
+    play scale(:e5, :major_pentatonic, num_octaves: 3).choose, rlease: beat/24.0
+  end
+  sleep beat * 32 * 12
+end
+
+
+# ====================================================================
+
