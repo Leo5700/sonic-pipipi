@@ -1,0 +1,78 @@
+# В ожидании
+# v1.0
+
+# Основные переменные:
+# длительность такта (stack)
+# длительность бита (beat)
+# число битов в такте (rate)
+
+use_synth :dsaw
+
+beat = 0.16
+rate = 4
+
+notes_a = ring( :b1, :c2, :d2, :e2)
+notes_b = ring( :a3, :a3, :e3, :e3)
+notes_c = ring( :b2, :c3, :e2, :e2, :b3, :c3, :e2, :e2)
+
+live_loop :a do
+  rate.times do
+    play notes_a.tick, release: beat
+    sleep beat
+  end
+end
+
+live_loop :b do
+  (rate * 5).times do
+    sleep beat
+  end
+  rate.times do
+    play notes_b.tick, release: beat, amp: 0.45
+    sleep beat
+  end
+end
+
+live_loop :c do
+  (rate * 15).times do
+    sleep beat
+  end
+  (rate * 2).times do
+    play notes_c.tick, release: beat
+    sleep beat
+  end
+end
+
+live_loop :d do
+  play :b2, release: beat * 64, amp: 0.2
+  sleep beat * rate * 14
+  play :c3, release: beat * 52, amp: 0.12
+  sleep beat * rate * 14
+end
+
+notes_starting = scale( :b5, :major_pentatonic, num_octaves: 2)
+live_loop :быстрый do
+  (rate * 6).times do
+    play notes_starting.choose, release: beat / 2.0, cutoff: rrand(110, 130)
+    sleep beat / 2.0
+  end
+  sleep beat * rate * 43
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#
