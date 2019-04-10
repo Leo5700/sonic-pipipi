@@ -16,11 +16,11 @@ import sounddevice as sd
 '''
 
 blocksize = 44100//10  # величина блока, забираемого из потока
-stacksize = 10  # число блоков для осреднения
+stacksize = 1  # число блоков для осреднения
 
 # расставим частоты по-рояльному
 base = 2
-octaves = 8
+octaves = 80
 fractions = 16  # на сколько частей делить октаву, со всеми бемолями - 16 частей
 x1, x2 = 13.75, 13.75 * base ** octaves
 bands = np.logspace(np.log(x1)/np.log(base), np.log(x2)/np.log(base),
@@ -73,7 +73,7 @@ def animate(i):
         spec =  np.abs(np.fft.fft(block))**2
         freq = np.fft.fftfreq(block.size, 1/bitrate)
 #        idx = np.argwhere(freq < 5000)
-        idx = np.argwhere((freq > 13.75) & (freq < 4000))
+        idx = np.argwhere((freq > 0) & (freq < 40000))
         spec_cut = spec[idx]
         freq_cut = freq[idx]
         specbybands = bandsmeanamp(np.squeeze(spec_cut), np.squeeze(freq_cut), bands)
