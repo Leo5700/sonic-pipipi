@@ -1,6 +1,6 @@
+# coding:utf
 '''
 # Шумы квартир v1 190327
-
 beat = 2.6
 rate = 1
 base = 25  # Hz
@@ -26,7 +26,7 @@ import random
 
 beat = 2.6
 rate = 1
-base = 25  # Hz
+base = 30  # Hz
 spacing = 5
 print(base)
 ps.use_synth(ps.DSAW)
