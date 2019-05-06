@@ -18,7 +18,9 @@ end
 play notes_a.choose, play notes_a.choose notes_a.choose
 play num_octaves p
 
-num_octaves play 
+num_octaves play num
+num_octavesn
+num
 
 
 
