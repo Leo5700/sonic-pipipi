@@ -1,28 +1,37 @@
 a =
-'
-2- ++- ++--+
-1+  -+-+-+-+
-'
+  '
+  2- ++- ++--+
+  1+  -+-+-+-+
+  '
+
+b = a[1, a.length].split("\n")
+
+# print b
+# print b.length
 
 # print a[1, a.length - 2].split('\n')
 
 # print a.leangth a.
 # print a[1, a.leangth]
 
-print a
+# print a
 
-print a[1, a.length - 2]
+# print a[1, a.length - 2]
 
-# for i in a[1, a.length - 2].split('\n') do
-#
-#   if i[0] == '1'
-#     print '123'
-#     play 60 if i == '-'
-#     play 68 if i == '+'
-#   end
-#   print i
-#   print i[0]
-# end
+for i in a[1, a.length].split("\n") do
+  track = i[2, i.length]
+  # if track[0] == '1'
+    # print '123'
+    # i[1, i.length].each do |_j|
+      # play 60 if _j == '-'
+      # play 68 if _j == '+'
+    # end
+  # end
+  print i
+  print i[0]
+  print track
+  print track[0]
+end
 
 # beat = 0.4
 #
