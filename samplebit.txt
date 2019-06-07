@@ -1,0 +1,64 @@
+# samplebit
+
+# track4 = '  '
+# track4 = '  '
+# track3 = '  '
+track2 = ' $, *'
+track1 = ' +,  , -,  '
+#         -- -- -- -- == == == ==
+track0 = '  ,  ,  ,  ,  ,  '  # с этим треком идет синхронизация
+
+beat0 = 0.2
+
+def prepare (track)
+  sync :track0
+  a = track.split(',')
+  b = a.map{|x| x.gsub(/\s+/, '')}
+  c = []
+  b.each do |x|
+    if x == '' then
+      c << :r
+    elsif !/\A\d+\z/.match(x) then
+      c << x
+    else
+      c << x.to_i
+    end
+  end
+  return c
+end
+
+
+live_loop :t4 do stop if not defined? track4
+  prepare(track4).each do |n|
+
+    sleep beat0
+end end
+
+live_loop :t3 do stop if not defined? track3
+  prepare(track3).each do |n|
+
+    sleep beat0
+end end
+
+live_loop :t2 do stop if not defined? track2
+  prepare(track2).each do |n|
+    sample :ambi_piano, rate: rrand(0.8, 1.2), amp: rrand(0.6, 0.87) if n == '$'
+    sample :bass_trance_c, amp: 0.9 if n == '*'
+    sleep beat0 * 4
+end end
+
+live_loop :t1 do stop if not defined? track1
+  prepare(track1).each do |n|
+    sample :ambi_drone, amp: rrand(0.3, 0.5) if n == '+'
+    if n == '-' then
+      with_fx :flanger, mix: 0.8, phase: 0.2 do
+        sample :ambi_drone, rate: 0.5, amp: 0.57
+      end
+    end
+    sleep beat0 * 4
+end end
+
+live_loop :track0 do
+  track0.split(',').each do |i| n = i.gsub(/\s+/, '')
+    sleep beat0
+end end
